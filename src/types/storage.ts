@@ -1,4 +1,4 @@
-import {AuthOptions} from './options';
+import { AuthOptions } from './options';
 
 export interface AuthStorage {
   set(key: string, value: any, options?: AuthOptions): void;

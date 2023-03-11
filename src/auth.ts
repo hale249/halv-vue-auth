@@ -1,19 +1,15 @@
-import {AuthOptions, AuthUser, LoginPayload} from './types';
-import {isTokenExpired} from './token-status';
-import {useStorage} from './storage';
+import { AuthOptions, AuthUser, LoginPayload } from './types';
+import { isTokenExpired } from './token-status';
+import { useStorage } from './storage';
 import jwtDecode from 'jwt-decode';
 import merge from 'lodash.merge';
 import get from 'lodash.get';
-import {defineStore} from 'pinia';
-import {ref, computed} from 'vue';
-import {Router} from 'vue-router';
-import {AxiosInstance} from 'axios';
+import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
+import { Router } from 'vue-router';
+import { AxiosInstance } from 'axios';
 
-export const createAuth = (
-  options: AuthOptions,
-  router: Router,
-  axios: AxiosInstance,
-) =>
+export const createAuth = (options: AuthOptions, router: Router, axios: AxiosInstance) =>
   defineStore('auth', () => {
     const storage = useStorage(options.storage.driver);
 
@@ -47,7 +43,7 @@ export const createAuth = (
     const setTokenExpiration = (tokenData: string) => {
       if (options.token.autoDecode) {
         try {
-          const decoded = jwtDecode<{user?: AuthUser; exp: number}>(tokenData);
+          const decoded = jwtDecode<{ user?: AuthUser; exp: number }>(tokenData);
 
           if (decoded.exp) {
             storage.set(options.expiredStorage, decoded.exp);
@@ -80,7 +76,7 @@ export const createAuth = (
       if (options.endpoints.logout) {
         try {
           loading.value = true;
-          const {data} = await axios!.request(merge(options.endpoints.logout));
+          const { data } = await axios!.request(merge(options.endpoints.logout));
           loading.value = false;
 
           await forceLogout();
@@ -117,9 +113,7 @@ export const createAuth = (
     };
 
     const setTokenHeader = (tokenData: string) => {
-      (axios!.defaults.headers as any)[
-        options.token.name
-      ] = `${options.token.type} ${tokenData}`;
+      (axios!.defaults.headers as any)[options.token.name] = `${options.token.type} ${tokenData}`;
     };
 
     const login = async <P = LoginPayload>(payload: P) => {
@@ -268,7 +262,7 @@ export const createAuth = (
 
       return Promise.resolve({
         code: 200,
-        data: {user, token},
+        data: { user, token },
         message: 'OK',
       });
     };

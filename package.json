@@ -3,14 +3,21 @@
   "version": "0.1.0",
   "description": "Authentication Plugin for Vue 3 with pinia state management",
   "author": "hale249 <lehatybg1@gmail.com>",
-  "homepage": "",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hale249/halv-vue-auth/issues"
+  },
+  "homepage": "https://github.com/hale249/halv-vue-auth/tree/master#readme",
   "files": [
     "src",
     "dist"
   ],
   "scripts": {
     "clean": "rimraf dist* coverage",
+    "format": "prettier --write \"**/*.{ts,js,vue,css,scss,json,md}\"",
+    "lint": "eslint --fix --ext .js,.jsx .",
+    "pre-commit": "lint-staged",
+    "huskyinstall": "husky install",
     "build": "vite build && tsc --emitDeclarationOnly",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: run tests from root\" && exit 1"
@@ -31,10 +38,22 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@types/isomorphic-fetch": "^0.0.36",
     "@types/js-cookie": "^3.0.3",
     "@types/lodash": "^4.14.191",
     "@types/lodash.get": "^4.4.7",
     "@types/lodash.merge": "^4.6.7",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "devmoji": "^2.3.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.4",
     "rimraf": "^4.4.0"
   },
   "main": "./dist/vue-auth.js",
@@ -47,5 +66,47 @@
       "require": "./dist/vue-auth.js"
     }
   },
-  "types": "./dist/types/index.d.ts"
+  "types": "./dist/types/index.d.ts",
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "htmlWhitespaceSensitivity": "ignore",
+    "insertPragma": false,
+    "jsxSingleQuote": false,
+    "printWidth": 120,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "plugins": [
+      "prettier"
+    ],
+    "extends": [
+      "prettier"
+    ],
+    "rules": {
+      "no-console": "off",
+      "@typescript-eslint/no-use-before-define": "off",
+      "prettier/prettier": "error",
+      "import/export": "off",
+      "antfu/if-newline": "off"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }

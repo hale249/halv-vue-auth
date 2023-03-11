@@ -1,10 +1,10 @@
 import SecureLS from 'secure-ls';
-import {AuthStorage} from '../types';
+import { AuthStorage } from '../types';
 
 export class SecureLocalStorage implements AuthStorage {
   protected _ls: SecureLS;
 
-  constructor(options = {encodingType: 'aes', isCompression: true}) {
+  constructor(options = { encodingType: 'aes', isCompression: true }) {
     this._ls = new SecureLS({
       ...options,
     });

@@ -1,4 +1,4 @@
-import {AuthFunction} from './types';
+import { AuthFunction } from './types';
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {

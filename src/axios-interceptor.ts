@@ -1,10 +1,10 @@
-import {normalizeURL} from './utils';
-import {StoreDefinition} from 'pinia';
-import {AxiosInstance, AxiosResponse} from 'axios';
-import {AuthOptions} from './types';
-import {useStorage} from './storage';
+import { normalizeURL } from './utils';
+import { StoreDefinition } from 'pinia';
+import { AxiosInstance, AxiosResponse } from 'axios';
+import { AuthOptions } from './types';
+import { useStorage } from './storage';
 import get from 'lodash.get';
-import {Router} from 'vue-router';
+import { Router } from 'vue-router';
 
 export const registerAxiosInterceptors = (
   axios: AxiosInstance,
@@ -20,7 +20,7 @@ export const registerAxiosInterceptors = (
   };
 
   axios.interceptors.request.use(
-    (config) => {
+    config => {
       const token = getAccessToken();
 
       if (token && config.headers) {
@@ -28,13 +28,13 @@ export const registerAxiosInterceptors = (
       }
       return config;
     },
-    (error) => {
+    error => {
       Promise.reject(error);
     },
   );
 
   axios.interceptors.response.use(
-    (response) => {
+    response => {
       return response;
     },
     function (error) {
@@ -43,11 +43,7 @@ export const registerAxiosInterceptors = (
       const originalRequestUrl = normalizeURL(originalRequest.url);
       const refreshTokenUrl = normalizeURL(options.endpoints.refresh?.url!);
 
-      if (
-        error.response.status === 401 &&
-        originalRequestUrl === refreshTokenUrl &&
-        options.refreshToken.autoLogout
-      ) {
+      if (error.response.status === 401 && originalRequestUrl === refreshTokenUrl && options.refreshToken.autoLogout) {
         auth.forceLogout();
         router.push({
           path: options.redirect.login,
@@ -58,14 +54,8 @@ export const registerAxiosInterceptors = (
         return Promise.reject(error);
       }
 
-      const isLogin =
-        originalRequestUrl === normalizeURL(options.endpoints.login.url!);
-      if (
-        error.response.status === 401 &&
-        !originalRequest._retry &&
-        options.refreshToken.enabled &&
-        !isLogin
-      ) {
+      const isLogin = originalRequestUrl === normalizeURL(options.endpoints.login.url!);
+      if (error.response.status === 401 && !originalRequest._retry && options.refreshToken.enabled && !isLogin) {
         originalRequest._retry = true;
 
         return axios

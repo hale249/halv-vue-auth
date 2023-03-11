@@ -1,7 +1,7 @@
-import {Ref} from 'vue';
-import {AuthOptions} from './options';
-import {AxiosInstance} from 'axios';
-import {Router} from 'vue-router';
+import { Ref } from 'vue';
+import { AuthOptions } from './options';
+import { AxiosInstance } from 'axios';
+import { Router } from 'vue-router';
 
 export type LoginPayload = {
   email: string;
@@ -55,8 +55,4 @@ export type AuthComposition = {
   setRefreshTokenData(data: any): void;
 };
 
-export type AuthFunction = (
-  options: AuthOptions,
-  router: Router,
-  axios: AxiosInstance,
-) => AuthComposition;
+export type AuthFunction = (options: AuthOptions, router: Router, axios: AxiosInstance) => AuthComposition;

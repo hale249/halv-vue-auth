@@ -47,8 +47,7 @@
 - [axios](https://github.com/axios/axios): Used as the default http client.
 - [Vuex](https://next.vuex.vuejs.org/): Used to store auth `state`.
 - [Vou Router](https://next.vuex.vuejs.org/): Used to redirect between pages.
-- [TypeScript](https://www.typescriptlang.org/): Written in TypeScript, optimize for Vue + TypeScript. But, also ship ESM and Common JS version on `dist`. 
-
+- [TypeScript](https://www.typescriptlang.org/): Written in TypeScript, optimize for Vue + TypeScript. But, also ship ESM and Common JS version on `dist`.
 
 ## Installation
 
@@ -68,11 +67,11 @@ Install the plugin to your Vue app.
 
 ```js
 // main.js
-import {createApp} from 'vue';
+import { createApp } from 'vue';
 import Auth from '@halv/vue-auth'; // 👈 import the plugin
-import store from '~/store'
-import router from '~/router'
-import axios from 'axios'
+import store from '~/store';
+import router from '~/router';
+import axios from 'axios';
 
 const app = createApp(App);
 
@@ -84,7 +83,7 @@ app.use(Auth, {
   options, // auth options
   store, // vuex store instance
   axios, // axios instance
-  router // vue router instance
+  router, // vue router instance
 }); // 👈 use the plugin
 
 app.mount('#app');
@@ -101,13 +100,13 @@ After that, you can access the plugin via `$auth` global property.
 If you are using composition API, you can also access the `auth` object by using `inject` method.
 
 ```js
-import {injectAuth} from '@halv/vue-auth'
+import { injectAuth } from '@halv/vue-auth';
 
 // user is Ref
-const {user} = injectAuth()
+const { user } = injectAuth();
 
 // access the user
-console.log(user)
+console.log(user);
 ```
 
 ### Use with Composition API
@@ -115,12 +114,12 @@ console.log(user)
 To use the auth in composition API, just import and use the `useAuth` function.
 
 ```ts
-import {useAuth} from '@halv/vue-auth';
+import { useAuth } from '@halv/vue-auth';
 
 const auth = useAuth();
 
 // OR with object destruction
-const {user} = useAuth();
+const { user } = useAuth();
 ```
 
 #### `login(payload: Object): Promise<AxiosResponse>`
@@ -196,14 +195,14 @@ Get the current logged in state.
 console.log(auth.loggedIn);
 ```
 
-
 ### Manually Creating The Auth Function
 
 First, create `auth.ts` file under your `src/plugins` folder.
+
 ```ts
-import {authOptions} from '~/config';
-import store, {AppRootState} from '~/store';
-import {createAuth} from '@halv/vue-auth';
+import { authOptions } from '~/config';
+import store, { AppRootState } from '~/store';
+import { createAuth } from '@halv/vue-auth';
 import axios from 'axios';
 import router from '~/router';
 
@@ -211,12 +210,13 @@ export const useAuth = () => createAuth<AppRootState>(authOptions, axios, store,
 ```
 
 Then, in your component, just import and use it as regular composition function. For example:
+
 ```vue
 <script setup lang="ts">
-import {useAuth} from '~/plugins/auth'
+import { useAuth } from '~/plugins/auth';
 
 // destruct user object from `useAuth` function
-const {user} = useAuth();
+const { user } = useAuth();
 
 console.log(user); // <-- user data
 </script>
@@ -227,7 +227,7 @@ console.log(user); // <-- user data
 This is the default options object:
 
 ```ts
-import { AuthOptions } from '@halv/vue-auth'
+import { AuthOptions } from '@halv/vue-auth';
 
 export const defaultOptions: AuthOptions = {
   endpoints: {
@@ -268,7 +268,6 @@ export const defaultOptions: AuthOptions = {
   },
 };
 ```
-
 
 ## Options
 
@@ -323,17 +322,21 @@ export const defaultOptions: AuthOptions = {
   - Default: `auth.user`
 
 ### `moduleName`
-  Vuex's module name.
-  - Default: `auth`
-  - Type: `string`
+
+Vuex's module name.
+
+- Default: `auth`
+- Type: `string`
 
 ### `expiredStorage`
-  Storage name for storing token expiratin time.
-  - Type: `string`
-  - Default: `auth.expired`
+
+Storage name for storing token expiratin time.
+
+- Type: `string`
+- Default: `auth.expired`
 
 ### `redirect`
-  
+
 - #### `home`
   Homepage path.
   - Type: `string`
@@ -343,11 +346,12 @@ export const defaultOptions: AuthOptions = {
   - Type: `string`
   - Default: `/`
 
-
 ### `registerAxiosInterceptors`
-  Register custom axios interceptors when `true`. Set the value to `false` if you want to use your own interceptors.
-  - Type: `boolean`
-  - Default: `true`
+
+Register custom axios interceptors when `true`. Set the value to `false` if you want to use your own interceptors.
+
+- Type: `boolean`
+- Default: `true`
 
 ### `storage`
 
@@ -355,7 +359,6 @@ export const defaultOptions: AuthOptions = {
   - Type: `string`
   - Default: `secureLs`
   - Available Options: `local` | `secureLs` | `cookie`
-
 
 ## Implementing Refresh Token
 
@@ -426,7 +429,6 @@ Indicates the refresh token is enabled or not.
 - Type: `string`
 - Default: `false`
 
-
 #### `property`
 
 Path of refresh token property from the response.
@@ -450,7 +452,7 @@ Storage name for storing refresh token data.
 
 #### `name`
 
-Payload name to sent when refreshing token. 
+Payload name to sent when refreshing token.
 
 - Type: `string`
 - Default: `refresh_token`
