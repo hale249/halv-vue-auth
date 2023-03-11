@@ -40,8 +40,7 @@
 
 ## Demo
 
-- Checkout online demo [here](https://vue-auth-demo.vercel.app/)
-- View example project [here](https://github.com/gravitano/volar-starter)
+- View example project [here](https://github.com/hale249/vue-auth-example.git)
 
 ## Dependencies
 
@@ -70,7 +69,7 @@ Install the plugin to your Vue app.
 ```js
 // main.js
 import {createApp} from 'vue';
-import Auth from '@gravitano/vue-auth'; // 👈 import the plugin
+import Auth from '@halv/vue-auth'; // 👈 import the plugin
 import store from '~/store'
 import router from '~/router'
 import axios from 'axios'

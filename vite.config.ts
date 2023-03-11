@@ -7,7 +7,8 @@ export default defineConfig({
     // minify: false,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'VAuth',
+      name: 'VueAuth',
+      fileName: 'vue-auth',
       formats: ['es', 'cjs', 'iife', 'umd'],
     },
     rollupOptions: {

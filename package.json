@@ -1,6 +1,6 @@
 {
   "name": "@halv/vue-auth",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Authentication Plugin for Vue 3 with pinia state management",
   "author": "hale249 <lehatybg1@gmail.com>",
   "homepage": "",
