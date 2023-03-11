@@ -1,6 +1,6 @@
 import {normalizeURL} from './utils';
 import {StoreDefinition} from 'pinia';
-import {AxiosInstance} from 'axios';
+import {AxiosInstance, AxiosResponse} from 'axios';
 import {AuthOptions} from './types';
 import {useStorage} from './storage';
 import get from 'lodash.get';
@@ -75,7 +75,7 @@ export const registerAxiosInterceptors = (
               [options.refreshToken.name]: auth.getRefreshToken(),
             },
           })
-          .then((res) => {
+          .then((res: AxiosResponse) => {
             if (res.status === 200) {
               const newToken = get(res.data, options.token.property);
               auth.setToken(newToken);

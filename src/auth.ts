@@ -261,6 +261,7 @@ export const createAuth = (
     };
 
     const loginAs = <U = AuthUser>(user: U, token: string) => {
+      // @ts-ignore
       setUser(user);
       setToken(token);
       setTokenHeader(token);
